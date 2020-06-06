@@ -7,24 +7,63 @@ date:   2020-01-04 22:23:04 +0530
 categories: jekyll update
 ---
 ## Introduction
-IN Progress
+Question Answering is a fascinating topic since ages. Examinations, 
+Quiz competitions - QA is ubiquitous. There are different methods to find answers to questions - search,
+FAQ based, extractive QA and others. Each method is different and has its own pros and cons. 
 
+To set some context on what these words mean - 
+* Search - Finding relevant documents in a text corpus
+* FAQ - Finding the answer based on a similar question already in the FAQ (Frequently Asked Questions)
+* Extractive QA - Finding the right answer automatically from the text corpus
+
+
+The invention of [**Transformer**](http://jalammar.github.io/illustrated-transformer/) 
+and subsequent [**BERT**](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html) methods in recent years has moved the needle in achieving 
+great accuracies and have made these techniques **usable** in production applications.
+
+We explain how to build QA applications at scale using these recent trends.
 
 ### Our Work
 
+We have applied BERT based architectures in FAQ based, document based QA systems. Overall the procedure is - 
 
+#### Data Processing
+Text data from different sources (read webpages, documents, social media, emails and others) 
+are collected, cleaned, pre-processed and indexed into a search platform like Elastic Search.
 
+#### Model Training & Fine Tuning
+There are a variety of [**BERT based models**](https://huggingface.co/transformers/summary.html). 
+Models pre-trained on large corpus of text have to be fine tuned on the required task, in this case a Q&A task using Q&A datasets. 
+The data can be from open source or annotated using the particular customer data.
 
-#### BERT based model Approach
-Recent advancements in text architectures such as Transformers and BERT have improved accuracy the
-of Question-Answering, Text Classification, Sentiment Analysis and various other tasks.
+#### Ask a Question
+When a query is entered by the user in the platform – the following happens.
+* Candidate passages from the search platform will be retrieved using a text algorithm
+* The candidate passages will be scored based on relevance
+* The top N passages will be input into the model to generate the potential answers (for every passage) along with the confidence scores.
+* The produced answers will be scored using an ML approach to finalize the best k answers
+* The answers will be presented to the user
 
-We calculated BERT similarity between emails instead of TF-IDF to improve the results. 
+#### User Feedback
+Platform will support the capability for the user to provide feedback on the answers shown. 
+The collected data will be stored and used for improving the scoring algorithms.
 
-BERT is trained on huge corpuses of text and understands the semantics better 
+A schematic is below
 
-We have used BERT in Q&A and text classification. You can find more details [here](.)
+<div class="imgcap">
+<img src="/assets/bertqa.jpg">
+</div>
 
+## Summary
+Overall, QA systems reduce the time taken to find answers in a text corpus. We have experience in building
+and deploying these applications in cloud as well as on-premise. 
+
+A couple of demo applications:
+
+* Millet FAQ Answering - [**click here**](http://millet-qa.herokuapp.com)
+* [**Thirukkural**](https://en.wikipedia.org/wiki/Tirukkuṛaḷ) search using Tamil keyword - [**click here**](http://kural-search.herokuapp.com)
+
+Please reach us [here](http://www.kaveri-ai.in) if you are looking for text solutions. 
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 [jekyll-gh]:   https://github.com/jekyll/jekyll
